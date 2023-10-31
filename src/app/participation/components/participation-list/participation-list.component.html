@@ -1,0 +1,45 @@
+<div class="flex">
+
+    <div class="w-3/4">
+
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select [(value)]="idactividad" (selectionChange)="findbyIdActivity(idactividad) ">
+                <mat-option *ngFor="let activities of activitiesList" [value]="activities.id">{{activities.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <div class="w-1/4 flex justify-end rounded px-8 pt-4 pb-4 mb-4 gap-4">
+        <button mat-raised-button color="primary" (click)="prueba()">Registrar Asistencia</button>
+    </div>
+
+</div>
+
+<div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Datos personales </th>
+            <td mat-cell *matCellDef="let element"> {{element.teeneger.name}} {{element.teeneger.surnamefather}} {{element.teeneger.surnamemother}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+             Asistencia
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (change)="selectRow(row,$event)" [value]="'A'">Asistio</mat-checkbox>
+              <mat-checkbox (change)="selectRow(row, $event)" [value]="'F'">Falto</mat-checkbox>
+              <mat-checkbox (change)="selectRow(row, $event)" [value]="'T'">Tardansa</mat-checkbox>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="adolescentColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: adolescentColumns;"></tr>
+    </table>
+</div>
